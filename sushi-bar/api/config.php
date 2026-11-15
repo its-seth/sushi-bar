@@ -11,3 +11,8 @@ const DB_HOST = 'localhost';
 const DB_NAME = 'sushi_bar';
 const DB_USER = 'root';
 const DB_PASS = '';
+
+// Fish Game API (https://marcconrad.com/uob/fish/doc.php)
+const FISH_API_JSON = 'https://marcconrad.com/uob/fish/api.php?out=json&base64=yes';
+const FISH_API_CSV  = 'https://marcconrad.com/uob/fish/api.php?out=csv&base64=yes';
+const PUZZLE_SECONDS_ALLOWED = 60; // a puzzle must be answered within this time
