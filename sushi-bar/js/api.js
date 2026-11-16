@@ -122,7 +122,15 @@ export async function leaderboard() {
       { username: 'nemo_n', score: 305, day: 4 },
       { username: 'bubbles99', score: 188, day: 3 },
     ];
-    const rows = [...sample, ...readJSON(DEMO_SCORES, [])].sort((a, b) => b.score - a.score).slice(0, 10);
+    // One row per player: their best game, plus how many games they played.
+    const best = new Map();
+    for (const row of [...sample, ...readJSON(DEMO_SCORES, [])]) {
+      const prev = best.get(row.username);
+      const games = (prev?.games ?? 0) + 1;
+      if (!prev || row.score > prev.score) best.set(row.username, { ...row, games });
+      else prev.games = games;
+    }
+    const rows = [...best.values()].sort((a, b) => b.score - a.score).slice(0, 10);
     return { ok: true, rows };
   }
   return request('leaderboard.php');
