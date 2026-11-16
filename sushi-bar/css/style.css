@@ -240,9 +240,11 @@ img { max-width: 100%; display: block; }
 .ingredient:active, .ingredient.is-pressed { transform: translateY(4px); box-shadow: 0 1px 0 #C9A574; }
 .ingredient-emoji { font-size: 2.3rem; line-height: 1.1; }
 .ingredient-label { font-family: var(--display); font-weight: 600; }
-.ingredient .key { position: absolute; top: 6px; right: 6px; }
-.ingredient.is-out { opacity: .45; }
-.ingredient.is-out::after { content: 'Out'; position: absolute; bottom: 6px; left: 6px; font-size: .7rem; font-weight: 800; color: var(--tuna); }
+.ingredient-key { font-size: .68rem; font-weight: 700; color: var(--ink-soft); opacity: .75; }
+.ingredient-stock { margin-top: 4px; padding: 1px 8px; border-radius: 999px; font-size: .72rem; font-weight: 800; background: #E3F1F4; color: var(--sea-deep); }
+.ingredient-stock.is-unlimited { background: transparent; color: var(--ink-soft); font-weight: 700; opacity: .7; }
+.ingredient-stock.is-low { background: var(--tuna); color: #fff; }
+.ingredient.is-out { opacity: .55; }
 
 .recipe-card { background: var(--rice); border-radius: var(--radius-l); padding: 20px; box-shadow: 0 10px 24px rgba(19, 85, 101, .18); display: flex; flex-direction: column; }
 .recipe-card h2 { margin: 0 0 10px; font-family: var(--display); font-weight: 600; font-size: 1.25rem; }
@@ -301,6 +303,7 @@ body.shake .restaurant { animation: shake .35s; }
 .delivery-result { margin: 14px 0; padding: .8em 1em; border-radius: 12px; font-weight: 600; }
 .delivery-result.is-right { background: #E5F3D8; color: #2F5A12; }
 .delivery-result.is-wrong { background: #FCE4E6; color: #8E1C26; }
+.delivery-result.is-offline { background: #FFF3D6; color: #6B4A00; }
 .delivery-outcome { display: block; margin-top: 4px; font-weight: 800; }
 
 .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin: 16px 0 0; }
@@ -321,6 +324,7 @@ body.shake .restaurant { animation: shake .35s; }
 .board-table td:first-child { border-radius: 12px 0 0 12px; font-family: var(--display); }
 .board-table td:last-child { border-radius: 0 12px 12px 0; }
 .board-table tr.is-me td { background: #E5F3D8; }
+.board-table td:nth-child(n+3) { font-variant-numeric: tabular-nums; }
 
 /* ---------- Smaller screens ---------- */
 @media (max-width: 1000px) {
