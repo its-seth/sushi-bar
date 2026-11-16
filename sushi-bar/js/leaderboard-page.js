@@ -1,6 +1,6 @@
 /*
  * leaderboard-page.js
- * Shows the top scores from the server and highlights the logged-in player.
+ * Shows each player's best game from the server and highlights the logged-in player.
  *
  * Source: generated with Claude (Anthropic), November 2026. Reviewed and adapted by: <your name>
  */
@@ -24,7 +24,7 @@ async function start() {
     res.rows.forEach((row, i) => {
       const tr = document.createElement('tr');
       if (row.username === me) tr.className = 'is-me';
-      const cells = [i + 1, row.username + (row.username === me ? ' (you)' : ''), row.score, `Day ${row.day}`];
+      const cells = [i + 1, row.username + (row.username === me ? ' (you)' : ''), row.score, `Day ${row.day}`, row.games ?? 1];
       for (const value of cells) {
         const td = document.createElement('td');
         td.textContent = value;
