@@ -25,6 +25,13 @@ function http_get(string $url): string
         CURLOPT_CONNECTTIMEOUT => 5,
         CURLOPT_FOLLOWLOCATION => true,
     ]);
+    // WAMP's PHP has no list of trusted certificate authorities, so HTTPS fails
+    // with "unable to get local issuer certificate". If api/cacert.pem exists
+    // (from https://curl.se/docs/caextract.html), use it. Certificate checks stay ON.
+    $caFile = __DIR__ . '/cacert.pem';
+    if (is_file($caFile)) {
+        curl_setopt($ch, CURLOPT_CAINFO, $caFile);
+    }
     $body = curl_exec($ch);
     $error = curl_error($ch);
     $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
