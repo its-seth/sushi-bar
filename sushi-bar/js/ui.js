@@ -59,7 +59,11 @@ export class GameUI {
       b.type = 'button';
       b.className = 'ingredient';
       b.dataset.ingredient = id;
-      b.innerHTML = `<span class="ingredient-emoji" aria-hidden="true">${ing.emoji}</span><span class="ingredient-label">${ing.label}</span><span class="key">${ing.key}</span>`;
+      b.title = `${ing.label} (keyboard shortcut: ${ing.key})`;
+      b.innerHTML = `<span class="ingredient-emoji" aria-hidden="true">${ing.emoji}</span>`
+        + `<span class="ingredient-label">${ing.label}</span>`
+        + `<span class="ingredient-key">Key ${ing.key}</span>`
+        + (id === 'fish' ? '<span class="ingredient-stock" data-fish-stock>0 left</span>' : '<span class="ingredient-stock is-unlimited">Unlimited</span>');
       b.addEventListener('click', () => this.addIngredient(id));
       wrap.appendChild(b);
     }
@@ -142,6 +146,11 @@ export class GameUI {
     $('fish').textContent = fish;
     const fishBtn = document.querySelector('[data-ingredient="fish"]');
     if (fishBtn) fishBtn.classList.toggle('is-out', fish <= 0);
+    const badge = document.querySelector('[data-fish-stock]');
+    if (badge) {
+      badge.textContent = fish <= 0 ? 'None left' : `${fish} left`;
+      badge.classList.toggle('is-low', fish <= 2);
+    }
     $('fish-chip').classList.toggle('is-low', fish <= 2);
   }
 
